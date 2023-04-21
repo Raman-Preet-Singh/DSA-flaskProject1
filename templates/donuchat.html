@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Python Flask Show Data on Google Pie Chart</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            {% for key, value in data.items() %}
+                {% if value is string %}
+                    ['{{ key }}', '{{ value }}'],
+                {% else %}
+                    ['{{ key }}', {{ value }}],
+                {% endif %}
+            {% endfor %}
+        ]);
+
+        var options = {
+          title: 'Currency Trend (Equivalent to US $dollar)',
+          is3D: true,
+          //pieHole: 0.5
+          pieStartAngle: 100
+          /*slices: {
+            2: {offset: 0.2},
+            3: {offset: 0.3}
+          }*/
+          /*slices: {
+            1: { color: 'transparent' }
+          }*/
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>
+<style>.button-74 {
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-74:hover {
+  background-color: #fff;
+}
+
+.button-74:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .button-74 {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+#image{
+    display: block;
+  margin-left: 50%;
+  margin-right: auto;
+  width: 50%;
+}
+{
+
+}</style>
+</head>
+<body>
+    <div style="margin: 10px 0 0 10px;width: 1000px">
+        <h3>Python Flask Show Data on Google Pie Chart</h3>
+        <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+    </div>
+<a href="/google_pie_chart_normal/piechart"><button class="button-74" id="btn" type="button">Pie-Chart</button></a>
+<a href="/google_pie_chart_donuchat/2D-chart"><button class="button-74" id="btn" type="button">2D-Chart</button></a>
+<a href="/google_pie_chart_barchat/barchat"><button class="button-74" id="btn" type="button">Bar-Chart</button></a>
+<a href="/"><button class="button-74" id="btn" type="button">Main Menu</button></a>
+    <h3>Developed by Raman Preet Singh,Georgian College,Data System Architecture</h3>
+
+
+</body>
+</html>
